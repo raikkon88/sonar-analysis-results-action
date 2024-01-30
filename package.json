@@ -1,0 +1,26 @@
+{
+  "name": "sonar-analysis-results-action",
+  "version": "1.0.0",
+  "description": "Publish a comment with the results of a sonarqube scan analysis",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raikkon88/sonar-analysis-results-action.git"
+  },
+  "author": "Marc Sánchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raikkon88/sonar-analysis-results-action/issues"
+  },
+  "homepage": "https://github.com/raikkon88/sonar-analysis-results-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "axios": "^1.6.7",
+    "markdown-table": "^3.0.3"
+  }
+}

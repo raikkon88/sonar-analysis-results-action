@@ -1,0 +1,18 @@
+name: "sonar-analysis-results-action"
+description: "Publish a comment with the results of a sonarqube scan analysis"
+inputs:
+  SONAR_TOKEN: # id of input
+    description: "Sonarqube token to authenticate"
+    required: true
+  SONAR_HOST: # id of input
+    description: "Sonarqube instance server used to upload the scan results"
+    required: true
+  SONAR_PROJECT_KEY: # id of input
+    description: "Target sonarqube project key used to retrieve the results"
+    required: true
+  GITHUB_TOKEN: # id of input
+    description: "Used to publish the comment in the pull request"
+    required: true
+runs:
+  using: "node20"
+  main: "index.js"
