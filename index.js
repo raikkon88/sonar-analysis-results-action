@@ -56,8 +56,6 @@ const publishComment = async (githubToken, comment) => {
 
 const exec = async () => {
 
-    console.log(JSON.stringify(github.context))
-
     const { githubToken, sonarqubeHost, sonarqubeProjectKey } = getParameters()
     const { data: authenticationResult } = await verifyToken(sonarqubeHost)
 
