@@ -46,7 +46,7 @@ const publishComment = async (githubToken, comment) => {
     await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
         owner: 'launchmetrics',
         repo: 'LM-Security',
-        issue_number: '205',
+        issue_number: github.context.payload.number,
         body: comment,
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
