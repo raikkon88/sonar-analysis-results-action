@@ -1,0 +1,1 @@
+# sonar-analysis-results-action
