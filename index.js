@@ -80,7 +80,6 @@ const exec = async () => {
 
 }
 
-exec().then(() => process.exit(0)).catch(err => {
-    console.error(err)
-    process.exit(1)
+exec().then(() => core.setOutput('Comment successfully published')).catch(err => {
+    core.setFailed(err.message);
 })

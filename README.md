@@ -10,18 +10,26 @@ The sonarqube query asks for the following metrics: `new_technical_debt`,`new_se
 
 ## Inputs
 
-## GITHUB_TOKEN
+## GITHUB_TOKEN
 
 Github authentication token
 
-## SONAR_HOST
+## SONAR_HOST
 
 Sonarqube host FQDN / IP, it should be https.
 
-## SONAR_TOKEN
+## SONAR_TOKEN
 
 Sonarqube authorization token generated from the Sonarqube server
 
-## SONAR_PROJECT_KEY
+## SONAR_PROJECT_KEY
 
 Sonarqube project key used to retrieve the results.
+
+## Example usage
+
+```yaml
+uses: actions/hello-world-javascript-action@e76147da8e5c81eaf017dede5645551d4b94427b
+with:
+  who-to-greet: "Mona the Octocat"
+```
