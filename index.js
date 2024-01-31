@@ -44,10 +44,9 @@ const createMarkdownMessage = (results) => {
 
 const publishComment = async (githubToken, comment) => {
     const octokit = github.getOctokit(githubToken)
-    await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
-        owner: github.context.payload.repository.owner.name,
-        repo: github.context.payload.repository.name,
-        issue_number: github.context.payload.number,
+    const issueUrl = github.context.payload.pull_request.issue_url.replace('https://api.github.com', '')
+    console.log(JSON.stringify(github))
+    await octokit.request(`POST ${issueUrl}/comments`, {
         body: comment,
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
