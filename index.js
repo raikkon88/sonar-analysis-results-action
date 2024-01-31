@@ -35,12 +35,12 @@ const getResults = async (sonarHost, sonarProject) => {
 
 const createMarkdownMessage = (results) => {
     const { component: { name, measures } } = results
-    const { sonarqubeProjectKey } = getParameters()
+    const { sonarqubeProjectKey, sonarqubeHost } = getParameters()
     const table = measures.map(measure => ([
         measure.metric.replaceAll('_', ' '),
         measure.period.value
     ]))
-    return `### Analysis results for project ${name}\n[Check sonarqube project](https://enter-sonarqube.launchmetrics.com/dashboard?id=${sonarqubeProjectKey}).\n\n${markdownTable([["Metric", "Count"], ...table])}`
+    return `### Analysis results for project ${name}\n[Check sonarqube project](https://${sonarqubeHost}/dashboard?id=${sonarqubeProjectKey}).\n\n${markdownTable([["Metric", "Count"], ...table])}`
 }
 
 const publishComment = async (githubToken, comment) => {
