@@ -45,7 +45,6 @@ const createMarkdownMessage = (results) => {
 const publishComment = async (githubToken, comment) => {
     const octokit = github.getOctokit(githubToken)
     const issueUrl = github.context.payload.pull_request.issue_url.replace('https://api.github.com', '')
-    console.log(JSON.stringify(github))
     await octokit.request(`POST ${issueUrl}/comments`, {
         body: comment,
         headers: {
@@ -74,8 +73,8 @@ const exec = async () => {
     try {
         await publishComment(githubToken, message)
     } catch (err) {
-        console.log(err)
-        throw new Error('Invalid github token')
+        console.error(err)
+        throw new Error('Failed on creating the comment on the pull request')
     }
 
 }
