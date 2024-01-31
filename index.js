@@ -5,6 +5,7 @@ import core from '@actions/core'
 
 
 const getParameters = () => {
+
     return {
         githubToken: core.getInput('GITHUB_TOKEN'),
         sonarqubeHost: core.getInput('SONAR_HOST').replace('https://', '').replace('http://', ''),
@@ -44,8 +45,8 @@ const createMarkdownMessage = (results) => {
 const publishComment = async (githubToken, comment) => {
     const octokit = github.getOctokit(githubToken)
     await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
-        owner: 'launchmetrics',
-        repo: 'LM-Security',
+        owner: github.context.payload.repository.owner.name,
+        repo: github.context.payload.repository.name,
         issue_number: github.context.payload.number,
         body: comment,
         headers: {
@@ -62,18 +63,20 @@ const exec = async () => {
     if (!authenticationResult.valid) {
         throw new Error('The authentication with the server failed')
     }
-
+    let message = ''
     try {
         const results = await getResults(sonarqubeHost, sonarqubeProjectKey)
-        const message = createMarkdownMessage(results)
-        try {
-            await publishComment(githubToken, message)
-        } catch (err) {
-            throw new Error('Invalid github token')
-        }
+        message = createMarkdownMessage(results)
     }
     catch (err) {
         throw new Error('Invalid sonarqube project key')
+    }
+
+    try {
+        await publishComment(githubToken, message)
+    } catch (err) {
+        console.log(err)
+        throw new Error('Invalid github token')
     }
 
 }
