@@ -44,6 +44,7 @@ const createMarkdownMessage = (results) => {
 
 const publishComment = async (githubToken, comment) => {
     const octokit = github.getOctokit(githubToken)
+    console.log(github.context)
     await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
         owner: github.context.payload.repository.owner.name,
         repo: github.context.payload.repository.name,
